@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Jackson — Field Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F1EEE4;
+    --ink:#20241F;
+    --rust:#B5502B;
+    --teal:#4F6E62;
+    --line:#20241F33;
+  }
+  *{box-sizing:border-box;}
+  html{font-size:clamp(16px, 0.55vw + 12px, 21px);}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', serif;
+    line-height:1.6;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace; letter-spacing:0.02em;}
+  .wrap{max-width:1240px; margin:0 auto; padding:0 5vw;}
+
+  header.hero{padding:7.5rem 0 5rem; border-bottom:1px solid var(--line); display:grid; grid-template-columns:1.15fr 0.85fr; gap:5rem; align-items:end;}
+  .filecode{font-size:0.9rem; color:var(--rust); margin:0 0 1.4rem;}
+  h1{font-size:4.3rem; line-height:1.05; font-weight:600; margin:0 0 1.2rem; max-width:12ch;}
+  .role{font-size:1.3rem; color:var(--teal); margin:0 0 1.8rem; font-style:italic;}
+  .lede{font-size:1.15rem; max-width:44ch; margin:0;}
+  .hero-photo{
+    position:relative;
+    background-color:#DFD9C6;
+    border:1px solid var(--line);
+    aspect-ratio:4/3;
+    display:flex; align-items:flex-end; padding:1rem;
+    overflow:hidden;
+  }
+  .hero-photo img{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:center; display:block;
+  }
+  .hero-photo span{
+    position:relative; z-index:1;
+    font-size:0.85rem; color:#F1EEE4;
+    background:rgba(32,36,31,0.55);
+    padding:0.25rem 0.6rem;
+    border-radius:2px;
+  }
+
+  section{padding:6rem 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .entry-tag{font-size:0.85rem; text-transform:lowercase; color:var(--ink); opacity:0.55; margin:0 0 0.6rem;}
+  h2{font-size:2.4rem; font-weight:600; margin:0 0 0.4rem; max-width:22ch;}
+  .subhead{font-size:1.05rem; color:var(--teal); margin:0 0 2.6rem;}
+
+  .body-grid{display:grid; grid-template-columns:1.3fr 0.9fr; gap:4.5rem; align-items:start;}
+  .col-text p{font-size:1.1rem; max-width:60ch; margin:0 0 1.3rem;}
+  .col-side{display:flex; flex-direction:column; gap:1.4rem;}
+
+  .stat-strip{display:flex; gap:0; margin:2.6rem 0 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .stat{flex:1; padding:1.4rem 1.6rem; border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat-num{font-size:1.8rem; font-weight:600; display:block;}
+  .stat-label{font-size:0.85rem; color:var(--ink); opacity:0.6;}
+
+  p{font-size:1.1rem; max-width:56ch; margin:0 0 1.2rem;}
+  .margin-note{
+    font-size:0.95rem; color:var(--rust); border-left:2px solid var(--rust);
+    padding-left:1.1rem; margin:0; max-width:none;
+  }
+
+  .photo{
+    position:relative;
+    background-color:#DFD9C6;
+    border:1px solid var(--line);
+    aspect-ratio:4/3;
+    display:flex; align-items:flex-end; padding:0.9rem;
+    overflow:hidden;
+  }
+  .photo img{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:center; display:block;
+  }
+  .photo span{
+    position:relative; z-index:1;
+    font-size:0.85rem; color:#F1EEE4;
+    background:rgba(32,36,31,0.55);
+    padding:0.25rem 0.6rem;
+    border-radius:2px;
+  }
+
+  .log{margin:0; padding:0; list-style:none;}
+  .log li{display:grid; grid-template-columns:5.5rem 1fr; gap:1.4rem; padding:1.2rem 0; border-top:1px solid var(--line);}
+  .log li:first-child{border-top:none;}
+  .log-day{font-size:0.85rem; color:var(--rust);}
+  .log-body p{margin:0; font-size:1.05rem; max-width:58ch;}
+  .log-body .lt{font-size:0.95rem; color:var(--teal); display:block; margin-bottom:0.3rem;}
+
+  footer{padding:5rem 0 7rem;}
+  .contact-line{display:flex; gap:2rem; flex-wrap:wrap; font-size:1rem;}
+  .contact-line a{color:var(--ink); text-decoration:none; border-bottom:1px solid var(--rust);}
+
+  @media (max-width:900px){
+    header.hero{grid-template-columns:1fr; gap:2rem;}
+    .body-grid{grid-template-columns:1fr;}
+    h1{font-size:2.6rem;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero wrap">
+  <div>
+    <p class="filecode mono">FIELD LOG — J.O</p>
+    <h1>Jackson Bledsoe</h1>
+    <p class="role">Software engineer, renewables</p>
+    <p class="lede">I build the systems that let asset managers see what their turbines, inverters and rangers are actually doing — and I go out and see it firsthand when I can. Two entries from the last twelve months below.</p>
+  </div>
+  <div class="hero-photo"><img src="images/1.png" alt="Jackson at Tilt Renewables office"><span>Thats me (on the right)!</span></div>
+</header>
+
+<section class="wrap">
+  <p class="entry-tag mono">entry 01 / production system</p>
+  <h2>TEMPO — a single pane of glass for a renewable fleet</h2>
+  <p class="subhead">Tilt Renewables AM Solution, built on Ignition</p>
+
+  <div class="body-grid">
+    <div class="col-text">
+      <p>Tilt Renewables runs wind and solar assets across the NEM through a small asset-management team that has to stay an "educated customer," not a maintenance crew. Before TEMPO, that meant separate SaaS logins per vendor, VPNs into individual SCADA systems, and no shared language between Vestas, GE and Suzlon status codes.</p>
+      <p>We normalized OEM status codes into one tag structure, historized time-series data at the edge and pushed it up to a centralized Ignition backend and Databricks. The interesting design problem wasn't the data pipeline — it was navigation. With hundreds to thousands of possible views across the asset hierarchy, we made the view itself database-driven, so new sites roll out without touching the project.</p>
+      <p>TEMPO was built to be extensible, not finished — capacity/availability calculations per turbine are next in the pipeline.</p>
+    </div>
+    <div class="col-side">
+      <div class="photo"><img src="images/2.png" alt="TEMPO wind performance dashboard"><span>Hub-and-spoke edge deployment, wind + solar sites</span></div>
+      <div class="photo"><img src="images/3(1).png" alt="TEMPO mobile portfolio overview"><span>Database-driven navigation, asset hierarchy</span></div>
+      <div class="margin-note">Also shipped: a Grafana-style global date range picker, now public on the Ignition Exchange.</div>
+    </div>
+  </div>
+
+  <div class="stat-strip">
+    <div class="stat"><span class="stat-num">1–3%</span><span class="stat-label">of revenue in prevented loss</span></div>
+    <div class="stat"><span class="stat-num">3</span><span class="stat-label">OEM data formats normalized</span></div>
+    <div class="stat"><span class="stat-num">1</span><span class="stat-label">system replacing per-vendor logins</span></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="entry-tag mono">entry 02 / field immersion</p>
+  <h2>Six days on Cape York, with Engineers Without Borders</h2>
+  <p class="subhead">Lama Lama Country to Coen, sponsored trip</p>
+
+  <div class="body-grid">
+    <div class="col-text">
+      <p>An EWB immersive is meant to teach city-based engineers what "designing for community need" actually requires. Mine mostly taught me how much of that phrase I'd been getting wrong.</p>
+      <ol class="log">
+        <li><span class="log-day mono">day 1</span><div class="log-body"><span class="lt">Lama Lama Country</span><p>Pre-work with Yintjingga Aboriginal Corporation, then an Aboriginal-led mangrove tour outside Cairns — history of the land, and how the tribe's access to it was dismantled.</p></div></li>
+        <li><span class="log-day mono">day 3–4</span><div class="log-body"><span class="lt">Port Stewart ranger base</span><p>The real basis for the whole immersive: a failed water-supply solution and a failing renewable energy install. Diesel generators cost ~$450/week to run out here.</p></div></li>
+        <li><span class="log-day mono">day 5</span><div class="log-body"><span class="lt">Coen primary school</span><p>Had the kids build bridges from playground scavenge, rated to hold three water bottles. One held the equivalent of 58.</p></div></li>
+      </ol>
+    </div>
+    <div class="col-side">
+      <div class="photo"><img src="images/4.png" alt="The Engineers team on Cape York"><span>The team, Lama Lama Country</span></div>
+      <div class="photo"><img src="images/5.jpg" alt="Team walking a dirt road on Cape York"><span>Dirt roads, far north QLD</span></div>
+      <div class="margin-note">Takeaway I keep coming back to: build on the solution the community already has, don't rip it up and start over.</div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p class="mono" style="font-size:0.8rem; opacity:0.6;">get in touch</p>
+  <div class="contact-line">
+    <a href="mailto:jacksonbledsoe@gmail.com">Email me!</a>
+    <!-- <a href="#">LinkedIn</a>
+    <a href="#">Ignition Exchange</a> -->
+  </div>
+</footer>
+
+</body>
+</html>
